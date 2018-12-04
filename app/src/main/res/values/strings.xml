@@ -1,6 +1,13 @@
 <resources>
-    <string name="app_name">GitHubJ</string>
+    <string name="app_name">GitHub</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_repositories">Repositories</string>
+    <string name="title_stars">Stars</string>
+    <string name="title_me">Me</string>
+
+
+    <string name="login_tips">Sign in to GitHub</string>
+    <string name="login_hint_username">Username or email address</string>
+    <string name="login_hint_password">Password</string>
+    <string name="login_sign_in">Sign in</string>
 </resources>

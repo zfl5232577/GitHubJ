@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/repositories_fragment"
         android:name="com.mark.java.githubj.view.RepositoriesFragment"
-        tools:layout="@layout/fragmen_home">
+        tools:layout="@layout/fragment_home">
 
         <!--<action-->
             <!--android:id="@+id/action_plant_list_fragment_to_plant_detail_fragment"-->
@@ -50,13 +50,23 @@
 
     <fragment
         android:id="@+id/stars_fragment"
-        android:name="com.mark.java.githubj.view.StarsFragment">
+        android:name="com.mark.java.githubj.view.StarsFragment"
+        tools:layout="@layout/fragment_home">
 
     </fragment>
 
     <fragment
         android:id="@+id/me_fragment"
         android:name="com.mark.java.githubj.view.MeFragment"
-        tools:layout="@layout/fragmen_home"></fragment>
+        tools:layout="@layout/fragment_home">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="com.mark.java.githubj.view.LoginFragment"
+        tools:layout="@layout/fragment_home">
+
+    </fragment>
 
 </navigation>

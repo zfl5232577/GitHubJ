@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.mark.java.githubj.databinding.FragmentHomeBinding;
 
+import androidx.annotation.Nullable;
 import cn.aorise.common.core.ui.base.BaseFragment;
 import cn.aorise.common.core.util.StatusBarUtil;
 
@@ -22,19 +23,21 @@ import cn.aorise.common.core.util.StatusBarUtil;
  */
 public class HomeFragment extends BaseFragment {
 
-    private FragmentHomeBinding mBinding;
+
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.e("mark", "onCreate: "+this );
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.e("mark", "onCreateView: ===================" );
-        mBinding = FragmentHomeBinding.inflate(inflater, container, false);
+        Log.e("mark", "onCreateView: ==================="+this );
+        FragmentHomeBinding mBinding = FragmentHomeBinding.inflate(inflater, container, false);
         StatusBarUtil.setLightMode(getActivity());
-        mBinding.text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mBinding.text.setText("dianji");
-            }
-        });
+        mBinding.text.setOnClickListener(view -> mBinding.text.setText("dianji"));
         return mBinding.getRoot();
     }
 }

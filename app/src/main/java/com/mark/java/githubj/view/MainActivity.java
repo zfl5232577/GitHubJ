@@ -1,19 +1,26 @@
 package com.mark.java.githubj.view;
 
-import android.view.MenuItem;
+import android.util.Log;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mark.java.githubj.R;
+import com.mark.java.githubj.databinding.ActivityMainBinding;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.navigation.NavController;
-import androidx.navigation.NavOptions;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import cn.aorise.common.core.ui.base.BaseActivity;
+import cn.aorise.common.core.util.SPUtils;
 
 public class MainActivity extends BaseActivity {
 
-    private NavController mController;
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private ActivityMainBinding mBinding;
 
     @Override
     protected void initData() {
@@ -22,35 +29,43 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        setContentView(R.layout.activity_main);
-        mController = Navigation.findNavController(this, R.id.main_fragment);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        NavigationUI.setupWithNavController(mBinding.navigation, Navigation.findNavController(this, R.id.main_fragment));
+        if (!SPUtils.getInstance().getBoolean("isLogin", false)) {
+            Navigation.findNavController(this, R.id.main_fragment).navigate(R.id.login_fragment);
+        }
     }
 
     @Override
     protected void initEvent() {
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            NavOptions.Builder builder = new NavOptions.Builder();
-            builder.setLaunchSingleTop(true);
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    builder.setPopUpTo(R.id.home_fragment,true);
-                    mController.navigate(R.id.home_fragment,null,builder.build());
-                    return true;
-                case R.id.navigation_repositories:
-                    mController.navigate(R.id.repositories_fragment,null,builder.build());
-                    return true;
-                case R.id.navigation_me:
-                    mController.navigate(R.id.me_fragment,null,builder.build());
-                    return true;
+        Navigation.findNavController(this, R.id.main_fragment).addOnNavigatedListener(new NavController.OnNavigatedListener() {
+            @Override
+            public void onNavigated(@NonNull NavController controller, @NonNull NavDestination destination) {
+                int id = destination.getId();
+                if (id == R.id.home_fragment
+                        || id == R.id.repositories_fragment
+                        || id == R.id.stars_fragment
+                        || id == R.id.me_fragment){
+                    mBinding.navigation.setVisibility(View.VISIBLE);
+                }else {
+                    mBinding.navigation.setVisibility(View.GONE);
+                }
             }
-            return false;
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (Navigation.findNavController(this, R.id.main_fragment).getCurrentDestination().getId()==R.id.login_fragment){
+            finish();
+            return;
         }
-    };
+        super.onBackPressed();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Log.e(TAG, "onSupportNavigateUp: ");
+        return super.onSupportNavigateUp();
+    }
 }
