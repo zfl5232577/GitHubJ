@@ -1,0 +1,84 @@
+apply plugin: 'com.android.library'
+
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    dataBinding {
+        enabled = true
+    }
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 126
+        versionName '1.2.6'
+        multiDexEnabled true
+
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    }
+
+    buildTypes {
+        def BASE_URL = 'BASE_URL'
+        def MOCK_MODE = 'MOCK_MODE'
+        release {
+            buildConfigField 'Boolean', MOCK_MODE, 'true'
+            buildConfigField 'String', BASE_URL, '"https://api.douban.com/"'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField 'Boolean', MOCK_MODE, 'true'
+            buildConfigField 'String', BASE_URL, '"https://api.douban.com/"'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+
+    annotationProcessor "androidx.room:room-compiler:$rootProject.roomVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+    api "android.arch.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    api "android.arch.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+    api "android.arch.work:work-runtime-ktx:$rootProject.workVersion"
+    api "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
+    api "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    api "androidx.core:core-ktx:$rootProject.ktxVersion"
+    api "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
+    api "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
+    api "androidx.room:room-runtime:$rootProject.roomVersion"
+    api "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    api "com.google.android.material:material:$rootProject.materialVersion"
+    api "com.google.code.gson:gson:$rootProject.gsonVersion"
+
+//    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
+//    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
+//    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
+
+    // okhttp3
+    api 'com.squareup.okhttp3:okhttp:3.11.0'
+    // retrofit2
+    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    // RxLifecycle
+    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
+    // retrofit2调用okhttp3写日志
+    api 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    // RX系列
+    api 'io.reactivex.rxjava2:rxjava:2.2.3'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    api 'com.google.code.gson:gson:2.8.5'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.35'
+}
