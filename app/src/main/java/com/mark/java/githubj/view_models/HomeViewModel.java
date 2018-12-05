@@ -1,10 +1,20 @@
 package com.mark.java.githubj.view_models;
 
+import android.text.TextUtils;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.mark.java.githubj.base.IBaseListener;
 import com.mark.java.githubj.data.LoginUser;
+import com.mark.java.githubj.data.ReceivedEvent;
 import com.mark.java.githubj.data.UserManasger;
+import com.mark.java.githubj.repository.HomeRepository;
 import com.mark.java.githubj.repository.LoginRepository;
 
+import java.util.List;
+
+import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -19,32 +29,31 @@ import androidx.lifecycle.ViewModel;
  */
 public class HomeViewModel extends ViewModel {
 
-    private LoginRepository mLoginRepository;
-    public MutableLiveData<String> mUserName = new MutableLiveData<>();
-    public MutableLiveData<String> mPassWord = new MutableLiveData<>();
-    public MutableLiveData<Boolean> loginSuccess = new MutableLiveData<>();
+    private HomeRepository mHomeRepository;
+    public MutableLiveData<List<ReceivedEvent>> events = new MutableLiveData<>();
+    public MutableLiveData<Boolean> refreshing = new MutableLiveData<>();
 
-    public HomeViewModel(LoginRepository loginRepository) {
-        mLoginRepository = loginRepository;
-        if (UserManasger.getInstance().isLogin()){
-            loginSuccess.setValue(true);
-        }
+    public HomeViewModel(HomeRepository homeRepository) {
+        mHomeRepository = homeRepository;
+        initReceivedEvents();
     }
 
+    public void initReceivedEvents() {
+        refreshing.setValue(true);
+        queryReceivedEvents(1);
+    }
 
-
-    public void login() {
-        mLoginRepository.login(mUserName.getValue(), mPassWord.getValue(), new IBaseListener<LoginUser>() {
+    public void queryReceivedEvents(int pageIndex){
+        mHomeRepository.queryReceivedEvents(pageIndex,new IBaseListener<List<ReceivedEvent>>() {
             @Override
-            public void onSuccess(LoginUser loginUser) {
-                loginSuccess.setValue(true);
+            public void onSuccess(List<ReceivedEvent> receivedEvents) {
+                refreshing.postValue(false);
             }
 
             @Override
             public void onError(Throwable exception) {
-
+                refreshing.postValue(false);
             }
         });
     }
-
 }

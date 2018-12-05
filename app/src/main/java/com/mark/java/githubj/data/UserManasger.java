@@ -23,18 +23,23 @@ import cn.aorise.common.core.util.SPUtils;
 public class UserManasger {
 
     private static volatile UserManasger mInstance;
-    private  LoginUser mLoginUser;
+    private LoginUser mLoginUser;
     private boolean isLogin;
 
     private UserManasger() {
         isLogin = SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).getBoolean(Constant.CacheKey.ISLOGIN);
-        mLoginUser = GsonUtils.fromJson(SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).getString(Constant.CacheKey.USER_INFO),LoginUser.class);
+        mLoginUser = GsonUtils.fromJson(SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).getString(Constant.CacheKey.USER_INFO), LoginUser.class);
     }
 
-    public static UserManasger getInstance(){
-        if (mInstance==null){
-            synchronized (UserManasger.class){
-                if(mInstance==null){
+    public void login(LoginUser loginUser) {
+        mLoginUser = loginUser;
+        isLogin = true;
+    }
+
+    public static UserManasger getInstance() {
+        if (mInstance == null) {
+            synchronized (UserManasger.class) {
+                if (mInstance == null) {
                     mInstance = new UserManasger();
                 }
             }
@@ -43,16 +48,16 @@ public class UserManasger {
     }
 
 
-    public boolean isLogin(){
-        return isLogin && mLoginUser!=null;
+    public boolean isLogin() {
+        return isLogin && mLoginUser != null;
     }
 
     public LoginUser getUserInfo() {
         return mLoginUser;
     }
 
-    public String getUserName(){
-        if (mLoginUser==null){
+    public String getUserName() {
+        if (mLoginUser == null) {
             throw new NullPointerException("mUserInfo is null,you need login() Or CacheUtils.getInstance().setSerializable(Constant.CacheKey.USER_INFO)");
         }
         return mLoginUser.getLogin();

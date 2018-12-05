@@ -42,6 +42,7 @@
     <fragment
         android:id="@+id/repositories_fragment"
         android:name="com.mark.java.githubj.ui.RepositoriesFragment"
+        android:label="@string/title_repositories"
         tools:layout="@layout/fragment_home">
 
         <!--<action-->
@@ -56,6 +57,7 @@
     <fragment
         android:id="@+id/stars_fragment"
         android:name="com.mark.java.githubj.ui.StarsFragment"
+        android:label="@string/title_stars"
         tools:layout="@layout/fragment_home">
 
     </fragment>
@@ -63,6 +65,7 @@
     <fragment
         android:id="@+id/me_fragment"
         android:name="com.mark.java.githubj.ui.MeFragment"
+        android:label="@string/title_me"
         tools:layout="@layout/fragment_home">
 
     </fragment>

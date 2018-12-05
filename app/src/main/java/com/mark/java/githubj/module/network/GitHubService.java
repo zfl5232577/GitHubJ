@@ -1,12 +1,17 @@
 package com.mark.java.githubj.module.network;
 
 import com.mark.java.githubj.data.LoginUser;
+import com.mark.java.githubj.data.ReceivedEvent;
+
+import java.util.List;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * <pre>
@@ -20,4 +25,15 @@ import retrofit2.http.Headers;
 public interface GitHubService {
     @GET("user")
     Observable<LoginUser> login(@Header("Authorization") String authorization);
+
+    @GET("users/{username}/received_events?")
+    Observable<List<ReceivedEvent>> queryReceivedEvents(@Path("username")String username,
+                                                        @Query("page")int pageIndex,
+                                                        @Query("per_page")int perPage);
+
+//    @GET("users/{username}/repos?")
+//    fun queryRepos(@Path("username") username: String,
+//                   @Query("page") pageIndex: Int,
+//                   @Query("per_page") perPage: Int,
+//                   @Query("sort") sort: String): Flowable<List<Repo>>
 }

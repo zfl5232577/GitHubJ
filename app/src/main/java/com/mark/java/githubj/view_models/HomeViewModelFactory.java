@@ -1,5 +1,6 @@
 package com.mark.java.githubj.view_models;
 
+import com.mark.java.githubj.repository.HomeRepository;
 import com.mark.java.githubj.repository.LoginRepository;
 
 import androidx.annotation.NonNull;
@@ -17,16 +18,16 @@ import androidx.lifecycle.ViewModelProvider;
  */
 public class HomeViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-    private LoginRepository mLoginRepository;
+    private HomeRepository mHomeRepository;
 
-    public HomeViewModelFactory(LoginRepository loginRepository) {
-        mLoginRepository = loginRepository;
+    public HomeViewModelFactory(HomeRepository homeRepository) {
+        mHomeRepository = homeRepository;
     }
 
     @NonNull
     @Override
     @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new LoginViewModel(mLoginRepository);
+        return (T) new HomeViewModel(mHomeRepository);
     }
 }

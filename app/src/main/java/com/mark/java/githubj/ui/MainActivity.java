@@ -51,14 +51,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (mCurrentID == R.id.home_fragment
-                || mCurrentID == R.id.repositories_fragment
-                || mCurrentID == R.id.stars_fragment
-                || mCurrentID == R.id.me_fragment){
+        if (mCurrentID == R.id.home_fragment){
             finish();
-            return;
+        }else {
+            Navigation.findNavController(this, R.id.main_fragment).navigateUp();
         }
-        super.onBackPressed();
     }
 
     @Override

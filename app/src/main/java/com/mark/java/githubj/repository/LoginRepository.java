@@ -6,6 +6,7 @@ import com.mark.java.githubj.BuildConfig;
 import com.mark.java.githubj.base.Constant;
 import com.mark.java.githubj.base.IBaseListener;
 import com.mark.java.githubj.data.LoginUser;
+import com.mark.java.githubj.data.UserManasger;
 import com.mark.java.githubj.module.network.API;
 import com.mark.java.githubj.module.network.GitHubAPICallback;
 import com.mark.java.githubj.module.network.GitHubAPIObserver;
@@ -54,8 +55,9 @@ public class LoginRepository {
 
                     @Override
                     public void onNext(LoginUser loginUser) {
-                        listener.onSuccess(loginUser);
+                        UserManasger.getInstance().login(loginUser);
                         saveUserInfo(loginUser);
+                        listener.onSuccess(loginUser);
                     }
                 }));
 

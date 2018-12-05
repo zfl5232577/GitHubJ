@@ -4,6 +4,7 @@ package com.mark.java.githubj.base;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,14 +17,21 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import cn.aorise.common.core.util.StatusBarUtil;
 
 
-public abstract class BaseFragment extends RxFragment {
+public abstract class BaseFragment extends Fragment {
 
     private Toolbar mToolBar = null;
     private TextView mTxtTitle = null;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        StatusBarUtil.setDarkMode(getActivity());
+        super.onActivityCreated(savedInstanceState);
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -42,10 +50,13 @@ public abstract class BaseFragment extends RxFragment {
     }
 
     private void initToolbar(Toolbar toolBar) {
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
         this.mToolBar = toolBar;
         if (this.mToolBar != null) {
             this.mToolBar.setTitle("");
-            ((AppCompatActivity)getActivity()).setSupportActionBar(mToolBar);
+            if (activity != null) {
+                activity.setSupportActionBar(mToolBar);
+            }
             this.mTxtTitle = mToolBar.findViewById(cn.aorise.common.R.id.toolbar_title);
             this.mTxtTitle.setText(Navigation.findNavController(mToolBar).getCurrentDestination().getLabel());
             this.mToolBar.setNavigationOnClickListener(new View.OnClickListener() {

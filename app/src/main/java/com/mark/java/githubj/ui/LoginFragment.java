@@ -46,7 +46,7 @@ public class LoginFragment extends BaseFragment {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean){
-                    Navigation.findNavController(mBinding.getRoot()).navigate(R.id.action_login_fragment_to_home_fragment);
+                    Navigation.findNavController(mBinding.getRoot()).navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment());
                 }
             }
         });

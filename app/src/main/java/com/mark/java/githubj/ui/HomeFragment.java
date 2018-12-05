@@ -14,8 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.mark.java.githubj.base.BaseFragment;
+import com.mark.java.githubj.repository.HomeRepository;
+import com.mark.java.githubj.repository.LoginRepository;
+import com.mark.java.githubj.view_models.HomeViewModel;
+import com.mark.java.githubj.view_models.HomeViewModelFactory;
+import com.mark.java.githubj.view_models.LoginViewModel;
+import com.mark.java.githubj.view_models.LoginViewModelFactory;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import cn.aorise.common.core.util.StatusBarUtil;
 
 /**
@@ -29,18 +36,16 @@ import cn.aorise.common.core.util.StatusBarUtil;
  */
 public class HomeFragment extends BaseFragment {
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.e("mark", "onCreate: "+this );
-        super.onCreate(savedInstanceState);
-    }
+
+    private HomeViewModel mViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.e("mark", "onCreateView: ==================="+this );
         FragmentHomeBinding mBinding = FragmentHomeBinding.inflate(inflater, container, false);
-        StatusBarUtil.setLightMode(getActivity());
-        mBinding.text.setOnClickListener(view -> mBinding.text.setText("dianji"));
+        HomeViewModelFactory factory = new HomeViewModelFactory(new HomeRepository());
+        mViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel.class);
+        mBinding.setViewModel(mViewModel);
+        mBinding.setLifecycleOwner(this);
         return mBinding.getRoot();
     }
 

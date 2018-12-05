@@ -26,7 +26,6 @@ public class MeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mBinding = FragmentHomeBinding.inflate(inflater, container, false);
-        mBinding.text.setText("MeFragment");
         StatusBarUtil.setLightMode(getActivity());
         return mBinding.getRoot();
     }

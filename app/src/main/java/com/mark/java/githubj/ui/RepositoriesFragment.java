@@ -26,7 +26,6 @@ public class RepositoriesFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mBinding = FragmentHomeBinding.inflate(inflater, container, false);
-        mBinding.text.setText("RepositoriesFragment");
         StatusBarUtil.setLightMode(getActivity());
         return mBinding.getRoot();
     }
