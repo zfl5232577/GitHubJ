@@ -1,5 +1,7 @@
-package com.mark.java.githubj.view;
+package com.mark.java.githubj.ui;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,8 +10,12 @@ import android.view.ViewGroup;
 
 import com.mark.java.githubj.databinding.FragmentHomeBinding;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import cn.aorise.common.core.ui.base.BaseFragment;
+
+import com.mark.java.githubj.base.BaseFragment;
+
+import androidx.appcompat.app.AppCompatActivity;
 import cn.aorise.common.core.util.StatusBarUtil;
 
 /**
@@ -22,9 +28,6 @@ import cn.aorise.common.core.util.StatusBarUtil;
  * </pre>
  */
 public class HomeFragment extends BaseFragment {
-
-
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,5 +42,11 @@ public class HomeFragment extends BaseFragment {
         StatusBarUtil.setLightMode(getActivity());
         mBinding.text.setOnClickListener(view -> mBinding.text.setText("dianji"));
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 }

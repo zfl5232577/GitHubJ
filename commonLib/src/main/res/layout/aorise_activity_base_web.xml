@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".core.ui.base.BaseWebActivity">
+    tools:context=".core.ui.com.mark.java.githubj.base.BaseWebActivity">
 
     <include layout="@layout/aorise_include_toolbar" />
 

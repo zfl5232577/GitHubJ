@@ -1,4 +1,4 @@
-package base;
+package com.mark.java.githubj.base;
 
 import cn.aorise.common.BaseApplication;
 

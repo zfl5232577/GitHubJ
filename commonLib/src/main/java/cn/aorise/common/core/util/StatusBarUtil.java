@@ -703,10 +703,23 @@ public class StatusBarUtil {
      * @param context context
      * @return 状态栏高度
      */
-    private static int getStatusBarHeight(Context context) {
-        // 获得状态栏高度
+    public static int getStatusBarHeight(Context context) {
+        int statusBarHeight;
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
-        return context.getResources().getDimensionPixelSize(resourceId);
+        if (resourceId > 0) {
+            statusBarHeight = context.getResources().getDimensionPixelSize(resourceId);
+        } else {
+            statusBarHeight = dp2px(context, 24);
+        }
+        return statusBarHeight;
+    }
+
+    /**
+     * 将dp值转换为px值
+     */
+    private static int dp2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 
     /**

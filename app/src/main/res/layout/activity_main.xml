@@ -7,7 +7,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.mark.java.githubj.view.MainActivity">
+        tools:context="com.mark.java.githubj.ui.MainActivity">
 
         <fragment
             android:id="@+id/main_fragment"
@@ -15,7 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:popUpToInclusive="true"
             app:navGraph="@navigation/nav_graph"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/navigation"/>

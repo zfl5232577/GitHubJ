@@ -29,7 +29,7 @@ public interface IAppCycle {
 //     */
 //    void destroy(Application context, boolean isKillProcess);
 
-//    void attachBaseContext(Context base);
+//    void attachBaseContext(Context com.mark.java.githubj.base);
 
     void onCreate(Application context);
 

@@ -16,9 +16,14 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
+        def BASE_URL = "BASE_URL"
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", BASE_URL, '"https://api.github.com/"'
+        }
+        debug {
+            buildConfigField "String", BASE_URL, '"https://api.github.com/"'
         }
     }
     compileOptions {
