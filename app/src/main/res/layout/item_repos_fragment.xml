@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import
+            type="cn.aorise.common.core.util.TimeUtils" />
+
+        <variable
+            name="data"
+            type="com.mark.java.githubj.data.Repos" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/aorise_size_8dp"
+        app:cardCornerRadius="@dimen/aorise_size_5dp"
+        app:cardElevation="@dimen/aorise_size_5dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/aorise_size_8dp">
+
+            <com.mark.java.githubj.ui.custom_view.CircleImageView
+                android:id="@+id/iv_repos_image"
+                android:layout_width="@dimen/aorise_size_16dp"
+                android:layout_height="@dimen/aorise_size_16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tv_repos_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/aorise_size_8dp"
+                android:layout_marginStart="@dimen/aorise_size_8dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_repos_image"
+                app:layout_constraintEnd_toStartOf="@+id/ivLanguageColor"
+                app:layout_constraintStart_toEndOf="@id/iv_repos_image"
+                app:layout_constraintTop_toTopOf="@id/iv_repos_image"
+                tools:text="zfl5232577" />
+
+            <com.mark.java.githubj.ui.custom_view.CircleImageView
+                android:id="@+id/ivLanguageColor"
+                android:layout_width="7dp"
+                android:layout_height="7dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_repos_language"
+                app:layout_constraintEnd_toStartOf="@+id/tv_repos_language"
+                app:layout_constraintTop_toTopOf="@+id/tv_repos_language"
+                tools:src="@color/color_language_kotlin" />
+
+            <TextView
+                android:id="@+id/tv_repos_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/iv_repos_image"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_repos_image"
+                tools:text="Java"/>
+
+            <TextView
+                android:id="@+id/tv_repos_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/aorise_size_10dp"
+                android:singleLine="true"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/iv_repos_image"
+                tools:text="zfl5235577/GitHubJ" />
+
+            <TextView
+                android:id="@+id/tv_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/aorise_size_10dp"
+                android:textColor="@color/secondaryTextGray"
+                android:textSize="12sp"
+                app:layout_constraintTop_toBottomOf="@id/tv_repos_title"
+                tools:text="利用GitHub开放API，使用JetPack+MVVM开发的Java版项目" />
+
+            <TextView
+                android:id="@+id/tvStars"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginTop="@dimen/aorise_size_10dp"
+                android:drawablePadding="@dimen/aorise_size_2dp"
+                android:drawableStart="@mipmap/ic_star_gray"
+                android:gravity="center_vertical"
+                android:textColor="@color/secondaryTextGray"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_desc"
+                tools:text="503" />
+
+            <TextView
+                android:id="@+id/tvIssue"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginStart="@dimen/aorise_size_15dp"
+                android:layout_marginTop="@dimen/aorise_size_10dp"
+                android:drawablePadding="@dimen/aorise_size_2dp"
+                android:drawableStart="@mipmap/ic_issue_gray"
+                android:gravity="center_vertical"
+                android:textColor="@color/secondaryTextGray"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/tvStars"
+                app:layout_constraintTop_toBottomOf="@id/tv_desc"
+                tools:text="33" />
+
+            <TextView
+                android:id="@+id/tvFork"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginStart="@dimen/aorise_size_15dp"
+                android:layout_marginTop="@dimen/aorise_size_10dp"
+                android:drawablePadding="@dimen/aorise_size_2dp"
+                android:drawableStart="@mipmap/ic_fork_gray"
+                android:gravity="center_vertical"
+                android:textColor="@color/secondaryTextGray"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/tvIssue"
+                app:layout_constraintTop_toBottomOf="@id/tv_desc"
+                tools:text="54" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

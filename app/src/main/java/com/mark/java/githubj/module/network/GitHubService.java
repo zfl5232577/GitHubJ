@@ -2,6 +2,7 @@ package com.mark.java.githubj.module.network;
 
 import com.mark.java.githubj.data.LoginUser;
 import com.mark.java.githubj.data.ReceivedEvent;
+import com.mark.java.githubj.data.Repos;
 
 import java.util.List;
 
@@ -27,13 +28,13 @@ public interface GitHubService {
     Observable<LoginUser> login(@Header("Authorization") String authorization);
 
     @GET("users/{username}/received_events?")
-    Observable<List<ReceivedEvent>> queryReceivedEvents(@Path("username")String username,
-                                                        @Query("page")int pageIndex,
-                                                        @Query("per_page")int perPage);
+    Observable<List<ReceivedEvent>> queryReceivedEvents(@Path("username") String username,
+                                                        @Query("page") int pageIndex,
+                                                        @Query("per_page") int perPage);
 
-//    @GET("users/{username}/repos?")
-//    fun queryRepos(@Path("username") username: String,
-//                   @Query("page") pageIndex: Int,
-//                   @Query("per_page") perPage: Int,
-//                   @Query("sort") sort: String): Flowable<List<Repo>>
+    @GET("users/{username}/repos?")
+    Observable<List<Repos>> queryRepos(@Path("username") String username,
+                                       @Query("page") int pageIndex,
+                                       @Query("per_page") int perPage,
+                                       @Query("sort") String sort);
 }

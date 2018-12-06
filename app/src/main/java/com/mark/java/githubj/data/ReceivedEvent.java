@@ -1,6 +1,22 @@
 package com.mark.java.githubj.data;
 
+import android.content.Intent;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.StyleSpan;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.google.gson.annotations.SerializedName;
+import com.mark.java.githubj.R;
+
+import androidx.core.content.ContextCompat;
 
 /**
  * <pre>
@@ -25,10 +41,10 @@ public class ReceivedEvent {
      */
 
     private String id;
-    private String type;
+    private Type type;
     private ActorBean actor;
     private RepoBean repo;
-    private PayloadBean payload;
+    //    private PayloadBean payload;
     @SerializedName("public")
     private boolean publicX;
     private String created_at;
@@ -41,11 +57,11 @@ public class ReceivedEvent {
         this.id = id;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -65,14 +81,6 @@ public class ReceivedEvent {
         this.repo = repo;
     }
 
-    public PayloadBean getPayload() {
-        return payload;
-    }
-
-    public void setPayload(PayloadBean payload) {
-        this.payload = payload;
-    }
-
     public boolean isPublicX() {
         return publicX;
     }
@@ -87,6 +95,70 @@ public class ReceivedEvent {
 
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
+    }
+
+
+    public Drawable eventTypeToDrawable(ImageView view, Type eventType){
+        if (eventType == Type.CreateEvent || eventType == Type.ForkEvent|| eventType == Type.PushEvent){
+            return ContextCompat.getDrawable(view.getContext(), R.mipmap.ic_fork_green_light);
+        }else {
+            return ContextCompat.getDrawable(view.getContext(), R.mipmap.ic_star_yellow_light);
+        }
+    }
+
+
+
+    public CharSequence eventTitle(TextView textView, ReceivedEvent event) {
+        String actor = event.actor.getDisplay_login();
+        String action;
+        switch (event.type) {
+            case WatchEvent:
+                action = "starred";
+                break;
+            case CreateEvent:
+                action = "created";
+                break;
+            case ForkEvent:
+                action = "forked";
+                break;
+            case PushEvent:
+                action = "pushed";
+                break;
+            default:
+                action = "watch";
+                break;
+        }
+        String repo = event.repo.name;
+
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+        spannableStringBuilder.append(actor).append(" ").append(action).append(" ").append(repo)
+                .setSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(View view) {
+                        view.getContext().getApplicationContext().startActivity(
+                                new Intent(Intent.ACTION_VIEW, Uri.parse(event.actor.getUrl())));
+                    }
+                }, 0, actor.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.setSpan(new ClickableSpan() {
+                                           @Override
+                                           public void onClick(View view) {
+                                               view.getContext().getApplicationContext().startActivity(
+                                                       new Intent(Intent.ACTION_VIEW, Uri.parse(event.repo.getUrl())));
+                                           }
+                                       },
+                actor.length() + action.length() + 2,
+                actor.length() + action.length() + repo.length() + 2,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        StyleSpan styleSpan = new StyleSpan(Typeface.BOLD);
+        spannableStringBuilder.setSpan(styleSpan, 0, actor.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.setSpan(styleSpan,
+                actor.length() + action.length() + 2,
+                actor.length() + action.length() + repo.length() + 2,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        return spannableStringBuilder;
     }
 
     public static class ActorBean {
@@ -214,5 +286,12 @@ public class ReceivedEvent {
         public void setForkee(String forkee) {
             this.forkee = forkee;
         }
+    }
+
+    public enum Type {
+        WatchEvent,
+        ForkEvent,
+        PushEvent,
+        CreateEvent
     }
 }

@@ -4,7 +4,7 @@
 
         <variable
             name="viewModel"
-            type="com.mark.java.githubj.view_models.HomeViewModel" />
+            type="com.mark.java.githubj.view_models.ReposViewModel" />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -24,14 +24,14 @@
             android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:onRefreshListener="@{() -> viewModel.initReceivedEvents() }"
+            app:onRefreshListener="@{() -> viewModel.initRepos() }"
             app:refreshing="@{viewModel.refreshing}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/item_home_fragment"/>
+                tools:listitem="@layout/item_repos_fragment"/>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

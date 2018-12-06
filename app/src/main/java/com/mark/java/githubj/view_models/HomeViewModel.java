@@ -1,6 +1,7 @@
 package com.mark.java.githubj.view_models;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -30,12 +31,20 @@ import androidx.lifecycle.ViewModel;
 public class HomeViewModel extends ViewModel {
 
     private HomeRepository mHomeRepository;
-    public MutableLiveData<List<ReceivedEvent>> events = new MutableLiveData<>();
-    public MutableLiveData<Boolean> refreshing = new MutableLiveData<>();
+    private MutableLiveData<List<ReceivedEvent>> events = new MutableLiveData<>();
+    private MutableLiveData<Boolean> refreshing = new MutableLiveData<>();
 
     public HomeViewModel(HomeRepository homeRepository) {
         mHomeRepository = homeRepository;
         initReceivedEvents();
+    }
+
+    public MutableLiveData<List<ReceivedEvent>> getEvents() {
+        return events;
+    }
+
+    public MutableLiveData<Boolean> getRefreshing() {
+        return refreshing;
     }
 
     public void initReceivedEvents() {
@@ -48,6 +57,7 @@ public class HomeViewModel extends ViewModel {
             @Override
             public void onSuccess(List<ReceivedEvent> receivedEvents) {
                 refreshing.postValue(false);
+                events.postValue(receivedEvents);
             }
 
             @Override

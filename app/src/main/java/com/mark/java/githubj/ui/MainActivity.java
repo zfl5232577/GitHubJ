@@ -1,8 +1,10 @@
 package com.mark.java.githubj.ui;
 
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mark.java.githubj.R;
 import com.mark.java.githubj.databinding.ActivityMainBinding;
 
@@ -28,11 +30,19 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        NavigationUI.setupWithNavController(mBinding.navigation, Navigation.findNavController(this, R.id.main_fragment));
     }
 
     @Override
     protected void initEvent() {
+        mBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                if (mCurrentID!= menuItem.getItemId() && !Navigation.findNavController(MainActivity.this, R.id.main_fragment).popBackStack(menuItem.getItemId(),false)){
+                    Navigation.findNavController(MainActivity.this, R.id.main_fragment).navigate(menuItem.getItemId());
+                }
+                return true;
+            }
+        });
         Navigation.findNavController(this, R.id.main_fragment).addOnNavigatedListener(new NavController.OnNavigatedListener() {
             @Override
             public void onNavigated(@NonNull NavController controller, @NonNull NavDestination destination) {
@@ -42,6 +52,7 @@ public class MainActivity extends BaseActivity {
                         || mCurrentID == R.id.stars_fragment
                         || mCurrentID == R.id.me_fragment){
                     mBinding.navigation.setVisibility(View.VISIBLE);
+                    mBinding.navigation.setSelectedItemId(mCurrentID);
                 }else {
                     mBinding.navigation.setVisibility(View.GONE);
                 }

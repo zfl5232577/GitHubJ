@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mark.java.githubj.data.ReceivedEvent;
 import com.mark.java.githubj.databinding.FragmentHomeBinding;
 
 import androidx.annotation.NonNull;
@@ -16,13 +17,18 @@ import androidx.annotation.Nullable;
 import com.mark.java.githubj.base.BaseFragment;
 import com.mark.java.githubj.repository.HomeRepository;
 import com.mark.java.githubj.repository.LoginRepository;
+import com.mark.java.githubj.ui.adapter.HomeAdapter;
 import com.mark.java.githubj.view_models.HomeViewModel;
 import com.mark.java.githubj.view_models.HomeViewModelFactory;
 import com.mark.java.githubj.view_models.LoginViewModel;
 import com.mark.java.githubj.view_models.LoginViewModelFactory;
 
+import java.util.List;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import cn.aorise.common.core.util.StatusBarUtil;
 
 /**
@@ -46,7 +52,12 @@ public class HomeFragment extends BaseFragment {
         mViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel.class);
         mBinding.setViewModel(mViewModel);
         mBinding.setLifecycleOwner(this);
+        HomeAdapter adapter = new HomeAdapter();
+        mBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mBinding.recyclerView.setAdapter(adapter);
+        mViewModel.getEvents().observe(getViewLifecycleOwner(), adapter::submitList);
         return mBinding.getRoot();
+
     }
 
     @Override

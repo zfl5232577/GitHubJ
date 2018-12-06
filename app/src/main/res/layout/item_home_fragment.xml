@@ -3,9 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import
+            type="cn.aorise.common.core.util.TimeUtils" />
+
+        <variable
+            name="data"
+            type="com.mark.java.githubj.data.ReceivedEvent" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/aorise_size_8dp"
         app:cardCornerRadius="@dimen/aorise_size_5dp"
         app:cardElevation="@dimen/aorise_size_5dp">
 
@@ -19,6 +30,8 @@
                 android:id="@+id/ivAvatar"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
+                android:background="#55555555"
+                app:imageFromUrl="@{data.actor.avatar_url}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription"
@@ -29,42 +42,42 @@
                 android:id="@+id/tvEventContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
                 android:ellipsize="end"
                 android:gravity="start"
                 android:maxLines="2"
+                android:text="@{ data.eventTitle(tvEventContent,data)}"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/ivEventType"
                 app:layout_constraintStart_toEndOf="@+id/ivAvatar"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Anyone star qingmei2/RxImagePicker" />
-            <!--android:text="@{ utils.eventTitle(tvEventContent, data, actorEvent, repoEvent) }"-->
 
             <TextView
                 android:id="@+id/tvEventTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
+                android:text="@{TimeUtils.getFriendlyTimeSpanByNow(data.created_at)}"
                 android:textColor="@color/secondaryTextGray"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tvEventContent"
                 app:layout_constraintStart_toStartOf="@+id/tvEventContent"
                 tools:text="2小时前" />
-            <!--android:text="@{ utils.eventTimeToString(data.createdAt) }"-->
 
             <ImageView
                 android:id="@+id/ivEventType"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:src="@{ data.eventTypeToDrawable(ivEventType,data.type) }"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription" />
 
-            <!--android:src="@{ utils.eventTypeToDrawable(ivEventType, data.type) }"-->
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

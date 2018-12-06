@@ -1,4 +1,4 @@
-package cn.aorise.common.core.util;
+package com.mark.java.githubj.utils;
 
 import android.text.TextUtils;
 import android.widget.ImageView;
