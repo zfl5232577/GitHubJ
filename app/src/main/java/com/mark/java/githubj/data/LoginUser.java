@@ -1,6 +1,11 @@
 package com.mark.java.githubj.data;
 
+import android.annotation.SuppressLint;
+
+import java.text.SimpleDateFormat;
+
 import cn.aorise.common.core.module.network.Response;
+import cn.aorise.common.core.util.TimeUtils;
 
 /**
  * <pre>
@@ -395,6 +400,12 @@ public class LoginUser extends Response{
 
     public void setPlan(PlanBean plan) {
         this.plan = plan;
+    }
+
+
+    @SuppressLint("SimpleDateFormat")
+    public String transCreateData(){
+        return "Joined at " + TimeUtils.getFriendlyTimeSpanByNow(created_at,new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"));
     }
 
     public static class PlanBean {

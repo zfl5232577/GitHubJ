@@ -4,10 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <import
-            type="cn.aorise.common.core.util.TimeUtils" />
-
         <variable
             name="data"
             type="com.mark.java.githubj.data.ReceivedEvent" />
@@ -30,7 +26,6 @@
                 android:id="@+id/ivAvatar"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:background="#55555555"
                 app:imageFromUrl="@{data.actor.avatar_url}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -60,7 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:text="@{TimeUtils.getFriendlyTimeSpanByNow(data.created_at)}"
+                android:text="@{data.transCreateData()}"
                 android:textColor="@color/secondaryTextGray"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"

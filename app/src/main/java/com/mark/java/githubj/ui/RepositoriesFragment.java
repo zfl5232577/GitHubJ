@@ -33,7 +33,6 @@ import cn.aorise.common.core.util.StatusBarUtil;
  */
 public class RepositoriesFragment extends BaseFragment {
 
-    private FragmentHomeBinding mBinding;
     private ReposViewModel mViewModel;
 
 

@@ -5,9 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mark.java.githubj.databinding.FragmentHomeBinding;
-
 import com.mark.java.githubj.base.BaseFragment;
+import com.mark.java.githubj.data.UserManasger;
+import com.mark.java.githubj.databinding.FragmentMeBinding;
+
 import cn.aorise.common.core.util.StatusBarUtil;
 
 /**
@@ -21,12 +22,12 @@ import cn.aorise.common.core.util.StatusBarUtil;
  */
 public class MeFragment extends BaseFragment {
 
-    private FragmentHomeBinding mBinding;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mBinding = FragmentHomeBinding.inflate(inflater, container, false);
+        FragmentMeBinding binding = FragmentMeBinding.inflate(inflater,container,false);
+        binding.setData(UserManasger.getInstance().getUserInfo());
+        binding.setLifecycleOwner(this);
         StatusBarUtil.setLightMode(getActivity());
-        return mBinding.getRoot();
+        return binding.getRoot();
     }
 }

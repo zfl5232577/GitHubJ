@@ -37,4 +37,10 @@ public interface GitHubService {
                                        @Query("page") int pageIndex,
                                        @Query("per_page") int perPage,
                                        @Query("sort") String sort);
+
+    @GET("users/{username}/starred?")
+    Observable<List<Repos>> queryStared(@Path("username") String username,
+                                       @Query("page") int pageIndex,
+                                       @Query("per_page") int perPage,
+                                       @Query("sort") String sort);
 }

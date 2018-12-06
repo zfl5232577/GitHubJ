@@ -1,6 +1,7 @@
 package com.mark.java.githubj.view_models;
 
 import com.mark.java.githubj.repository.HomeRepository;
+import com.mark.java.githubj.repository.IBaseReposRepository;
 import com.mark.java.githubj.repository.RepositoriesRepository;
 
 import androidx.annotation.NonNull;
@@ -18,9 +19,9 @@ import androidx.lifecycle.ViewModelProvider;
  */
 public class ReposViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-    private RepositoriesRepository mRepositoriesRepository;
+    private IBaseReposRepository mRepositoriesRepository;
 
-    public ReposViewModelFactory(RepositoriesRepository repositoriesRepository) {
+    public ReposViewModelFactory(IBaseReposRepository repositoriesRepository) {
         mRepositoriesRepository = repositoriesRepository;
     }
 

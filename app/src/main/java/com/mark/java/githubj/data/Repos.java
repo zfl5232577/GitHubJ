@@ -1,8 +1,15 @@
 package com.mark.java.githubj.data;
 
+import android.annotation.SuppressLint;
+import android.widget.ImageView;
+
 import com.google.gson.annotations.SerializedName;
+import com.mark.java.githubj.R;
+
+import java.text.SimpleDateFormat;
 
 import cn.aorise.common.core.module.network.Response;
+import cn.aorise.common.core.util.TimeUtils;
 
 /**
  * <pre>
@@ -149,7 +156,7 @@ public class Repos extends Response {
     private int size;
     private int stargazers_count;
     private int watchers_count;
-    private Object language;
+    private String language;
     private boolean has_issues;
     private boolean has_projects;
     private boolean has_downloads;
@@ -164,6 +171,11 @@ public class Repos extends Response {
     private int open_issues;
     private int watchers;
     private String default_branch;
+    private String defDesc = "(No description, website, or topics provided.)";
+
+    public String getDefDesc() {
+        return defDesc;
+    }
 
     public int getId() {
         return id;
@@ -621,11 +633,11 @@ public class Repos extends Response {
         this.watchers_count = watchers_count;
     }
 
-    public Object getLanguage() {
+    public String getLanguage() {
         return language;
     }
 
-    public void setLanguage(Object language) {
+    public void setLanguage(String language) {
         this.language = language;
     }
 
@@ -739,6 +751,33 @@ public class Repos extends Response {
 
     public void setDefault_branch(String default_branch) {
         this.default_branch = default_branch;
+    }
+
+    public int transLanguageColor() {
+        if (language == null) return R.color.transparent;
+        switch (language) {
+            case "Kotlin":
+                return R.color.color_language_kotlin;
+            case "Java":
+                return R.color.color_language_java;
+            case "JavaScript":
+                return R.color.color_language_js;
+            case "Python":
+                return R.color.color_language_python;
+            case "HTML":
+                return R.color.color_language_html;
+            case "CSS":
+                return R.color.color_language_css;
+            case "Shell":
+                return R.color.color_language_shell;
+            case "C++":
+                return R.color.color_language_cplus;
+            case "C":
+                return R.color.color_language_c;
+            case "ruby":
+                return R.color.color_language_ruby;
+        }
+        return R.color.color_language_other;
     }
 
     public static class OwnerBean {

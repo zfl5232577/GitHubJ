@@ -7,8 +7,7 @@
 
     <data>
 
-        <import
-            type="cn.aorise.common.core.util.TimeUtils" />
+        <import type="cn.aorise.common.core.util.TimeUtils" />
 
         <variable
             name="data"
@@ -28,10 +27,11 @@
             android:layout_height="match_parent"
             android:padding="@dimen/aorise_size_8dp">
 
-            <com.mark.java.githubj.ui.custom_view.CircleImageView
+            <ImageView
                 android:id="@+id/iv_repos_image"
                 android:layout_width="@dimen/aorise_size_16dp"
                 android:layout_height="@dimen/aorise_size_16dp"
+                app:bind_imageUrl_circle="@{data.owner.avatar_url}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@mipmap/ic_launcher" />
@@ -40,10 +40,11 @@
                 android:id="@+id/tv_repos_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/aorise_size_8dp"
                 android:layout_marginStart="@dimen/aorise_size_8dp"
+                android:layout_marginEnd="@dimen/aorise_size_8dp"
                 android:ellipsize="end"
                 android:singleLine="true"
+                android:text="@{data.owner.login}"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_repos_image"
@@ -57,25 +58,28 @@
                 android:layout_width="7dp"
                 android:layout_height="7dp"
                 android:layout_marginEnd="4dp"
+                android:src="@{data.transLanguageColor()}"
+                app:bind_visibility="@{ data.language != null }"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_repos_language"
                 app:layout_constraintEnd_toStartOf="@+id/tv_repos_language"
-                app:layout_constraintTop_toTopOf="@+id/tv_repos_language"
-                tools:src="@color/color_language_kotlin" />
+                app:layout_constraintTop_toTopOf="@+id/tv_repos_language" />
 
             <TextView
                 android:id="@+id/tv_repos_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/iv_repos_image"
                 android:textSize="12sp"
+                android:text="@{data.language}"
+                app:layout_constraintBottom_toBottomOf="@id/iv_repos_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/iv_repos_image"
-                tools:text="Java"/>
+                tools:text="Java" />
 
             <TextView
                 android:id="@+id/tv_repos_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@{ data.full_name }"
                 android:layout_marginTop="@dimen/aorise_size_10dp"
                 android:singleLine="true"
                 android:textColor="@color/primaryTextColor"
@@ -88,6 +92,7 @@
                 android:id="@+id/tv_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@{data.description==null? data.defDesc:data.description}"
                 android:layout_marginTop="@dimen/aorise_size_10dp"
                 android:textColor="@color/secondaryTextGray"
                 android:textSize="12sp"
@@ -99,9 +104,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="16dp"
                 android:layout_marginTop="@dimen/aorise_size_10dp"
-                android:drawablePadding="@dimen/aorise_size_2dp"
                 android:drawableStart="@mipmap/ic_star_gray"
+                android:drawablePadding="@dimen/aorise_size_2dp"
                 android:gravity="center_vertical"
+                android:text="@{ String.valueOf(data.stargazers_count) }"
                 android:textColor="@color/secondaryTextGray"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -114,9 +120,10 @@
                 android:layout_height="16dp"
                 android:layout_marginStart="@dimen/aorise_size_15dp"
                 android:layout_marginTop="@dimen/aorise_size_10dp"
-                android:drawablePadding="@dimen/aorise_size_2dp"
                 android:drawableStart="@mipmap/ic_issue_gray"
+                android:drawablePadding="@dimen/aorise_size_2dp"
                 android:gravity="center_vertical"
+                android:text="@{ String.valueOf(data.open_issues_count) }"
                 android:textColor="@color/secondaryTextGray"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/tvStars"
@@ -129,9 +136,10 @@
                 android:layout_height="16dp"
                 android:layout_marginStart="@dimen/aorise_size_15dp"
                 android:layout_marginTop="@dimen/aorise_size_10dp"
-                android:drawablePadding="@dimen/aorise_size_2dp"
                 android:drawableStart="@mipmap/ic_fork_gray"
+                android:drawablePadding="@dimen/aorise_size_2dp"
                 android:gravity="center_vertical"
+                android:text="@{ String.valueOf(data.forks_count) }"
                 android:textColor="@color/secondaryTextGray"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/tvIssue"

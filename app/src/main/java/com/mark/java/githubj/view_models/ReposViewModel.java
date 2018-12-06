@@ -4,6 +4,7 @@ import com.mark.java.githubj.base.IBaseListener;
 import com.mark.java.githubj.data.ReceivedEvent;
 import com.mark.java.githubj.data.Repos;
 import com.mark.java.githubj.repository.HomeRepository;
+import com.mark.java.githubj.repository.IBaseReposRepository;
 import com.mark.java.githubj.repository.RepositoriesRepository;
 
 import java.util.List;
@@ -22,11 +23,11 @@ import androidx.lifecycle.ViewModel;
  */
 public class ReposViewModel extends ViewModel {
 
-    private RepositoriesRepository mRepositoriesRepository;
+    private IBaseReposRepository mRepositoriesRepository;
     private MutableLiveData<List<Repos>> mRepos = new MutableLiveData<>();
     private MutableLiveData<Boolean> refreshing = new MutableLiveData<>();
 
-    public ReposViewModel(RepositoriesRepository repositoriesRepository) {
+    public ReposViewModel(IBaseReposRepository repositoriesRepository) {
         mRepositoriesRepository = repositoriesRepository;
         initRepos();
     }

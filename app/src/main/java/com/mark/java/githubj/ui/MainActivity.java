@@ -52,9 +52,11 @@ public class MainActivity extends BaseActivity {
                         || mCurrentID == R.id.stars_fragment
                         || mCurrentID == R.id.me_fragment){
                     mBinding.navigation.setVisibility(View.VISIBLE);
+                    mBinding.navigationShadow.setVisibility(View.VISIBLE);
                     mBinding.navigation.setSelectedItemId(mCurrentID);
                 }else {
                     mBinding.navigation.setVisibility(View.GONE);
+                    mBinding.navigationShadow.setVisibility(View.GONE);
                 }
             }
         });

@@ -1,5 +1,6 @@
 package com.mark.java.githubj.data;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -16,7 +17,10 @@ import android.widget.TextView;
 import com.google.gson.annotations.SerializedName;
 import com.mark.java.githubj.R;
 
+import java.text.SimpleDateFormat;
+
 import androidx.core.content.ContextCompat;
+import cn.aorise.common.core.util.TimeUtils;
 
 /**
  * <pre>
@@ -106,7 +110,10 @@ public class ReceivedEvent {
         }
     }
 
-
+    @SuppressLint("SimpleDateFormat")
+    public String transCreateData(){
+        return TimeUtils.getFriendlyTimeSpanByNow(created_at,new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"));
+    }
 
     public CharSequence eventTitle(TextView textView, ReceivedEvent event) {
         String actor = event.actor.getDisplay_login();
