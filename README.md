@@ -1,16 +1,27 @@
 # GitHubJ
 利用GitHub开放API，使用JetPack+MVVM开发的Java版项目
 
+## DataBinding
+
+## ViewModel
+
+## LiveData
+
+## Navigation
+
+## Paging
+
+
 ## ScreenShots
 
 <div align:left;display:inline;>
-<img width="300" height="540" src="https://github.com/qingmei2/MVVM-Rhine/blob/master/screenshots/login.png"/>
-<img width="300" height="540" src="https://github.com/qingmei2/MVVM-Rhine/blob/master/screenshots/home.png"/>
+<img width="300" height="540" src="https://github.com/zfl5232577/GitHubJ/blob/master/screenshots/screenshots1.jpg"/>
+<img width="300" height="540" src="https://github.com/zfl5232577/GitHubJ/blob/master/screenshots/screenshots2.jpg"/>
 </div>
 
 <div align:left;display:inline;>
-<img width="300" height="540" src="https://github.com/qingmei2/MVVM-Rhine/blob/master/screenshots/repos.png"/>
-<img width="300" height="540" src="https://github.com/qingmei2/MVVM-Rhine/blob/master/screenshots/me.png"/>
+<img width="300" height="540" src="https://github.com/zfl5232577/GitHubJ/blob/master/screenshots/screenshots3.jpg"/>
+<img width="300" height="540" src="https://github.com/zfl5232577/GitHubJ/blob/master/screenshots/screenshots4.jpg"/>
 </div>
 
 ## Libraries
@@ -75,7 +86,7 @@
 
 :art: The UI design of this project refers to [gitme](https://github.com/flutterchina/gitme).
 
-:star: Thanks for [rx-mvvm-android](https://github.com/ffgiraldez/rx-mvvm-android)'s guidance during development.
+:star: Thanks for [MVVM-Rhine](https://github.com/qingmei2/MVVM-Rhine)'s guidance during development.
 
 ## License
 
