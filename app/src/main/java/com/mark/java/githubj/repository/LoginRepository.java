@@ -55,16 +55,17 @@ public class LoginRepository {
 
                     @Override
                     public void onNext(LoginUser loginUser) {
-                        UserManasger.getInstance().login(loginUser);
-                        saveUserInfo(loginUser);
+                        UserManasger.getInstance().login(loginUser,authorization);
+                        saveUserInfo(loginUser,authorization);
                         listener.onSuccess(loginUser);
                     }
                 }));
 
     }
 
-    private void saveUserInfo(LoginUser loginUser){
+    private void saveUserInfo(LoginUser loginUser,String authorization){
         SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).put(Constant.CacheKey.ISLOGIN,true);
+        SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).put(Constant.CacheKey.AUTHORIZATION,authorization);
         SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).put(Constant.CacheKey.USER_INFO, GsonUtils.toJson(loginUser),true);
     }
 }

@@ -11,6 +11,7 @@ import com.mark.java.githubj.databinding.ItemReposFragmentBinding;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
  *     version: 1.0
  * </pre>
  */
-public class RepositoriesAdapter extends ListAdapter<Repos, RepositoriesAdapter.ReposViewHolder> {
+public class RepositoriesAdapter extends PagedListAdapter<Repos, RepositoriesAdapter.ReposViewHolder> {
 
     public RepositoriesAdapter() {
         super(new DiffUtil.ItemCallback<Repos>() {

@@ -28,18 +28,18 @@ public interface GitHubService {
     Observable<LoginUser> login(@Header("Authorization") String authorization);
 
     @GET("users/{username}/received_events?")
-    Observable<List<ReceivedEvent>> queryReceivedEvents(@Path("username") String username,
+    Observable<List<ReceivedEvent>> queryReceivedEvents(@Header("Authorization") String authorization,@Path("username") String username,
                                                         @Query("page") int pageIndex,
                                                         @Query("per_page") int perPage);
 
     @GET("users/{username}/repos?")
-    Observable<List<Repos>> queryRepos(@Path("username") String username,
+    Observable<List<Repos>> queryRepos(@Header("Authorization") String authorization,@Path("username") String username,
                                        @Query("page") int pageIndex,
                                        @Query("per_page") int perPage,
                                        @Query("sort") String sort);
 
     @GET("users/{username}/starred?")
-    Observable<List<Repos>> queryStared(@Path("username") String username,
+    Observable<List<Repos>> queryStared(@Header("Authorization") String authorization,@Path("username") String username,
                                        @Query("page") int pageIndex,
                                        @Query("per_page") int perPage,
                                        @Query("sort") String sort);

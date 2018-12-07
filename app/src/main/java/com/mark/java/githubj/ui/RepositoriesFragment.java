@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mark.java.githubj.R;
 import com.mark.java.githubj.databinding.FragmentHomeBinding;
 
 import com.mark.java.githubj.base.BaseFragment;
@@ -39,6 +40,7 @@ public class RepositoriesFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentReposBinding mBinding = FragmentReposBinding.inflate(inflater, container, false);
+        mBinding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
         ReposViewModelFactory factory = new ReposViewModelFactory(new RepositoriesRepository());
         mViewModel = ViewModelProviders.of(this, factory).get(ReposViewModel.class);
         mBinding.setViewModel(mViewModel);

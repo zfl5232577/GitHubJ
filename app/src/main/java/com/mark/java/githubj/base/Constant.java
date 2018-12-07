@@ -10,9 +10,11 @@ package com.mark.java.githubj.base;
  * </pre>
  */
 public class Constant {
+    public static final int PAGE_SIZE = 12;
     public static class CacheKey{
         public static final String USER_CACHE_NAME = "user";
         public static final String ISLOGIN = "isLogin";
+        public static final String AUTHORIZATION = "authorization";
         public static final String USER_INFO = "user_info";
     }
 }

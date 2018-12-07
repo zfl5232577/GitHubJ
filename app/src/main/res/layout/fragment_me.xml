@@ -19,17 +19,9 @@
             android:layout_height="260dp"
             android:scaleType="centerCrop"
             android:alpha="0.5"
-            app:imageFromUrl="@{data.avatar_url}"
+            app:bind_imageUrl_blur="@{data.avatar_url}"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/iv_me_head_fb"
-            android:layout_width="match_parent"
-            android:layout_height="260dp"
-            android:background="@color/colorPrimary"
-            android:alpha="0.7"
-            android:scaleType="centerCrop"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_user_photo"
@@ -114,8 +106,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/aorise_size_20dp"
                     android:textColor="@color/green"
+                    android:gravity="center"
                     android:text="@{data.email}"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:drawableStart="@drawable/ic_email_black_24dp"
+                    android:drawablePadding="@dimen/aorise_size_10dp"
                     android:textSize="@dimen/aorise_font_size_small"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_user_bio"

@@ -25,15 +25,22 @@ public class UserManasger {
     private static volatile UserManasger mInstance;
     private LoginUser mLoginUser;
     private boolean isLogin;
+    private String authorization;
 
     private UserManasger() {
         isLogin = SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).getBoolean(Constant.CacheKey.ISLOGIN);
+        authorization = SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).getString(Constant.CacheKey.AUTHORIZATION);
         mLoginUser = GsonUtils.fromJson(SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).getString(Constant.CacheKey.USER_INFO), LoginUser.class);
     }
 
-    public void login(LoginUser loginUser) {
+    public void login(LoginUser loginUser,String authorization) {
         mLoginUser = loginUser;
         isLogin = true;
+        this.authorization = authorization;
+    }
+
+    public String getAuthorization() {
+        return authorization;
     }
 
     public static UserManasger getInstance() {

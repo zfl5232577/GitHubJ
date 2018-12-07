@@ -10,6 +10,7 @@ import com.mark.java.githubj.databinding.ItemHomeFragmentBinding;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
  *     version: 1.0
  * </pre>
  */
-public class HomeAdapter extends ListAdapter<ReceivedEvent, HomeAdapter.HomeViewHolder> {
+public class HomeAdapter extends PagedListAdapter<ReceivedEvent, HomeAdapter.HomeViewHolder> {
 
     public HomeAdapter() {
         super(new DiffUtil.ItemCallback<ReceivedEvent>() {

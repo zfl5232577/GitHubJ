@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mark.java.githubj.R;
 import com.mark.java.githubj.data.ReceivedEvent;
 import com.mark.java.githubj.databinding.FragmentHomeBinding;
 
@@ -48,6 +49,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentHomeBinding mBinding = FragmentHomeBinding.inflate(inflater, container, false);
+        mBinding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
         HomeViewModelFactory factory = new HomeViewModelFactory(new HomeRepository());
         mViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel.class);
         mBinding.setViewModel(mViewModel);

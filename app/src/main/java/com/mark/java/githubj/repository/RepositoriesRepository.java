@@ -1,6 +1,7 @@
 package com.mark.java.githubj.repository;
 
 import com.mark.java.githubj.BuildConfig;
+import com.mark.java.githubj.base.Constant;
 import com.mark.java.githubj.base.IBaseListener;
 import com.mark.java.githubj.data.ReceivedEvent;
 import com.mark.java.githubj.data.Repos;
@@ -29,7 +30,7 @@ public class RepositoriesRepository implements IBaseReposRepository {
     @Override
     public void queryRepos(int pageIndex,IBaseListener<List<Repos>> listener){
         RetrofitFactory.getInstance().create(GitHubService.class, API.BASE_URL,BuildConfig.DEBUG)
-                .queryRepos(UserManasger.getInstance().getUserName(),pageIndex,12,"")
+                .queryRepos(UserManasger.getInstance().getAuthorization(),UserManasger.getInstance().getUserName(),pageIndex, Constant.PAGE_SIZE,"")
                 .subscribeOn(Schedulers.io())
                 .subscribe(new GitHubAPIObserver<>(null, new GitHubAPICallback<List<Repos>>() {
                     @Override
