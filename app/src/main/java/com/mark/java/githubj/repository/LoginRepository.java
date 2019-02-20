@@ -13,10 +13,7 @@ import com.mark.java.githubj.module.network.GitHubAPIObserver;
 import com.mark.java.githubj.module.network.GitHubService;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
-import androidx.lifecycle.OnLifecycleEvent;
 import cn.aorise.common.core.manager.ActivityManager;
-import cn.aorise.common.core.module.network.APICallback;
-import cn.aorise.common.core.module.network.APIObserver;
 import cn.aorise.common.core.module.network.RetrofitFactory;
 import cn.aorise.common.core.module.network.RxSchedulers;
 import cn.aorise.common.core.ui.base.BaseActivity;
@@ -36,10 +33,10 @@ import retrofit2.HttpException;
  */
 public class LoginRepository {
 
-    public void login(String userName,String password,IBaseListener<LoginUser> listener){
+    public void login(String userName, String password, IBaseListener<LoginUser> listener) {
         BaseActivity baseActivity = (BaseActivity) ActivityManager.getInstance().currentActivity();
-                String authorization = "basic " + Base64.encodeToString((userName+":"+password).getBytes(),Base64.NO_WRAP);
-        RetrofitFactory.getInstance().create(GitHubService.class, API.BASE_URL,BuildConfig.DEBUG)
+        String authorization = "basic " + Base64.encodeToString((userName + ":" + password).getBytes(), Base64.NO_WRAP);
+        RetrofitFactory.getInstance().create(GitHubService.class, API.BASE_URL, BuildConfig.DEBUG)
                 .login(authorization)
                 .compose(RxSchedulers.compose(baseActivity, baseActivity.bindUntilEvent(ActivityEvent.STOP)))
                 .subscribe(new GitHubAPIObserver<>(baseActivity, new GitHubAPICallback<LoginUser>() {
@@ -55,17 +52,17 @@ public class LoginRepository {
 
                     @Override
                     public void onNext(LoginUser loginUser) {
-                        UserManasger.getInstance().login(loginUser,authorization);
-                        saveUserInfo(loginUser,authorization);
+                        UserManasger.getInstance().login(loginUser, authorization);
+                        saveUserInfo(loginUser, authorization);
                         listener.onSuccess(loginUser);
                     }
                 }));
 
     }
 
-    private void saveUserInfo(LoginUser loginUser,String authorization){
-        SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).put(Constant.CacheKey.ISLOGIN,true);
-        SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).put(Constant.CacheKey.AUTHORIZATION,authorization);
-        SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).put(Constant.CacheKey.USER_INFO, GsonUtils.toJson(loginUser),true);
+    private void saveUserInfo(LoginUser loginUser, String authorization) {
+        SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).put(Constant.CacheKey.ISLOGIN, true);
+        SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).put(Constant.CacheKey.AUTHORIZATION, authorization);
+        SPUtils.getInstance(Constant.CacheKey.USER_CACHE_NAME).put(Constant.CacheKey.USER_INFO, GsonUtils.toJson(loginUser), true);
     }
 }
